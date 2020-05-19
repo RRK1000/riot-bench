@@ -6,6 +6,8 @@ import in.dream_lab.bm.stream_iot.tasks.aggregate.AccumlatorTask;
 import in.dream_lab.bm.stream_iot.tasks.aggregate.BlockWindowAverage;
 import in.dream_lab.bm.stream_iot.tasks.aggregate.DistinctApproxCount;
 import in.dream_lab.bm.stream_iot.tasks.annotate.Annotate;
+import in.dream_lab.bm.stream_iot.tasks.merge.Join;
+import in.dream_lab.bm.stream_iot.tasks.join.TableJoin;
 import in.dream_lab.bm.stream_iot.tasks.filter.BloomFilterCheck;
 import in.dream_lab.bm.stream_iot.tasks.filter.BloomFilterTrain;
 import in.dream_lab.bm.stream_iot.tasks.filter.RangeFilterCheck;
@@ -235,6 +237,16 @@ public class AggregateBolts {
 		protected ITask getTaskInstance() { return new Annotate();
 		}
 	}
+
+	//Join
+	public static class JoinBolt extends BaseTaskBolt {
+		public JoinBolt(Properties p_) { super(p_); }
+
+		@Override
+		protected ITask getTaskInstance() { return new TableJoin();
+		}
+	}
+
 	//no operation
 	public static class NoOperationBolt extends BaseTaskBolt {
 		public NoOperationBolt(Properties p_) { super(p_); }

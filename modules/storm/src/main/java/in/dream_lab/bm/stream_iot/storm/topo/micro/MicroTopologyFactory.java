@@ -47,6 +47,7 @@ public class MicroTopologyFactory {
 			case "Interpolation" : return newInterpolationBolt(p);
 			//annotate
 			case "Annotate" : return newAnnotateBolt(p);
+			case "Join": return newJoinBolt(p);
 			
 			//no operation task for benchmark
 			case "NoOperation" : return newNoOperationBolt(p); 
@@ -160,6 +161,11 @@ public class MicroTopologyFactory {
 	//annotate
 	public static BaseTaskBolt newAnnotateBolt(Properties p) {
 		return new AggregateBolts.AnnotateBolt(p);
+	}
+
+	//join
+	public static BaseTaskBolt newJoinBolt(Properties p) {
+		return new AggregateBolts.JoinBolt(p);
 	}
 	
 	//no operation 

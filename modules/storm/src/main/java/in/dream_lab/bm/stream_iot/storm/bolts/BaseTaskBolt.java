@@ -47,9 +47,10 @@ public abstract class BaseTaskBolt extends BaseRichBolt {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(AbstractTask.DEFAULT_KEY, rowString);
         Float res = task.doTask(map);
+        String joinedOp = (String) task.getLastResult();
 
         if(res != null ) {
-            if(res != Float.MIN_VALUE) collector.emit(new Values(rowString, msgId, res));
+            if(res != Float.MIN_VALUE) collector.emit(new Values(rowString, msgId, joinedOp));
             else {
                 if (l.isWarnEnabled()) l.warn("Error in task {} for input {}", task, rowString);
                 throw new RuntimeException("Error in task " + task + " for input " + rowString);
